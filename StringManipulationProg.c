@@ -28,7 +28,7 @@
 
  3.  VERSIONS
        Original:
-         5.3.2020 / Elias Grönholm
+         23.3.2023 / Elias Grönholm
 
        Version history:
 
@@ -53,21 +53,24 @@
 #define STDLEN 100
 #define MAX_LINE 80000
 
-/* Global variables */
-
-/* Global structures */
 
 
 /*-------------------------------------------------------------------*
 *    FUNCTION PROTOTYPES                                             *
 *--------------------------------------------------------------------*/
 int count_vowel(char *str);
+int count_consonants(char *str);
+int change_string(char *str);
+int read_from_file(char *str);
+int write_to_file(char *str);
+
+
+
 /*********************************************************************
 *    MAIN PROGRAM                                                      *
 **********************************************************************/
-
 int main(void){
-char cmd;
+char command;
 char str[STDLEN]={"Hello world!"} ;
 printf("--------------------------------------------------------------------------------------------------------\n");
 printf("                                  String Editor by: Elias Gronholm\n");
@@ -76,19 +79,19 @@ print_menu();
 
 
 while (1){
-cmd=getchar();
+command=getchar();
 
 
 
-    switch(toupper(cmd)){
+    switch(toupper(command)){
 
         case 'A':
-            printf("Counting vowels\n");
+            printf("Printing vowels in string\n");            
             printf("%d vowels!\n",count_vowel(str));
         break;
 
         case 'B':
-            printf("Counting consonants\n");
+            printf("Printing consonants in string\n");
             printf("%d consonants!\n",count_consonants(str));
         break;
 
@@ -97,6 +100,7 @@ cmd=getchar();
             strupr(str);
             printf("Converted to uppercase\n");
         break;
+
         case 'D':
             printf("Converting to lowercase\n");
             strlwr(str);
@@ -134,24 +138,18 @@ cmd=getchar();
 
 
 /*********************************************************************
-*   FUNCTIONS                    
-    int count_vowel(char *str)
-    int count_consonants(char *str)                               *
+*   FUNCTIONS                                                        *
 **********************************************************************/
 
 
 /*********************************************************************
- NAME:
- DESCRIPTION:
-	Input:
-	Output:
-  Used global variables:
+ NAME: count_vowel
+ DESCRIPTION: counts the amount of vowels in a string
+	Input: string
+	Output: amount of vowels
+  Used global variables: none
  REMARKS when using this function:
 *********************************************************************/
-
-
-#define STDLEN 100
-#define MAX_LINE 80000
 
 int count_vowel(char *str){
     char vowel[12] = {"AEIOUYaeiouy"};
@@ -168,7 +166,14 @@ int count_vowel(char *str){
     }
 return count;
 }
-
+/*********************************************************************
+ NAME:  count_consonants
+ DESCRIPTION:   counts the amount of consonants in a string
+	Input:  string
+	Output: amount of consonants
+  Used global variables:    none
+ REMARKS when using this function:  none
+*********************************************************************/
 int count_consonants(char *str){
     char consonants[] = {"BCDFGHJKLMNPQRSTVWXYZbcdghjklmnpqrstvwxyz"};
     int i,j=0;
@@ -185,15 +190,28 @@ int count_consonants(char *str){
 return count;
 }
 
-
+/*********************************************************************
+ NAME:  change_string
+ DESCRIPTION:   changes the string
+	Input:  string from stdin
+	Output: none
+  Used global variables:  none
+ REMARKS when using this function:  none
+*********************************************************************/
 int change_string(char *str){
     puts("Enter new string");
     scanf("%1[\n]");
     fgets(str,STDLEN,stdin);
 }
 
-
-
+/*********************************************************************
+ NAME:  read_from_file
+ DESCRIPTION:   reads a string from a file
+	Input:  string
+	Output: none
+  Used global variables:    none
+ REMARKS when using this function:  none
+*********************************************************************/
 int read_from_file(char *str){
 FILE *file; 
 
@@ -237,7 +255,14 @@ return 0;
 
 
 
-
+/*********************************************************************
+ NAME:  write_to_file
+ DESCRIPTION:   writes a string to a file
+	Input:  string
+	Output: none
+  Used global variables:    none
+ REMARKS when using this function:  none
+*********************************************************************/
 int write_to_file(char *str){
 int line=0;
 char c=0;
@@ -267,8 +292,14 @@ return 0;
 
 
 
-
-
+/*********************************************************************
+ NAME:  print_menu
+ DESCRIPTION:   prints the menu
+	Input:  none
+	Output: menu
+  Used global variables:    none
+ REMARKS when using this function:  none
+*********************************************************************/
 int print_menu(void){
 printf("\n\n");
 printf("A)  Count the number of vowels in the string\n");
